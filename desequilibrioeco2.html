@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <header class="mini-banner">
+        <header class="mini-banner">
         <a href="lol.html"></a><img src="logo-removebg-preview (1).png" width="100" height="100"> <center><h1 class="banner">PlayGreen!</center>
         <nav>
             <ul class="nav-links">
@@ -14,11 +14,8 @@
     </head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-    <tyle>Sopa de Letras</title>
+    <title>Sopa de Letras</title>
     <script> 
-alert("¡Bienvenido a la Sopa de Letras de Cadenas Troficas!, PlayGreen te desea buena suerte.");
-
         const wordSearch = [
     ['D', 'E', 'S', 'E', 'Q', 'U', 'I', 'L', 'I', 'B', 'R', 'I', 'O', 'D', 'X'],
     ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'E', 'X'],
@@ -49,7 +46,8 @@ const wordList = {
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-
+let tiempoRestante = 180;  // 5 minutos en segundos
+let intervalo;  // Variable para almacenar el intervalo del temporizador
 
 function getRandomLetter() {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
@@ -84,9 +82,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    
+    // Iniciar temporizador
+    iniciarTemporizador();
 });
 
+// Temporizador
+function iniciarTemporizador() {
+    intervalo = setInterval(() => {
+        if (tiempoRestante <= 0) {
+            clearInterval(intervalo);  // Detener el temporizador cuando se agote el tiempo
+            document.getElementById('time').textContent = '00:00';
+            alert('¡El tiempo se ha agotado!');
+            deshabilitarJuego();  // Deshabilitar la sopa de letras cuando el tiempo se acabe
+        } else {
+            tiempoRestante--; // Reducir el tiempo restante cada segundo
+
+            let minutos = Math.floor(tiempoRestante / 60); // Calcular los minutos
+            let segundos = tiempoRestante % 60; // Calcular los segundos
+
+            // Mostrar el tiempo actualizado en el formato 'mm:ss'
+            document.getElementById('time').textContent = `${formatTiempo(minutos)}:${formatTiempo(segundos)}`;
+        }
+    }, 1000); // Ejecutar cada segundo
+}
 
 // Función para formatear el tiempo
 function formatTiempo(tiempo) {
@@ -177,67 +195,45 @@ function reiniciarJuego() {
         cell.classList.remove('disabled');  // Eliminar cualquier estilo de "deshabilitado"
     });
 }
-document.addEventListener('DOMContentLoaded', () => {
-    llenarConLetrasAleatorias();
-    const wordSearchContainer = document.getElementById('word-search');
-
-    // Mostrar las palabras a encontrar
-    mostrarPalabras();
-
-    // Crear la sopa de letras
-    wordSearch.forEach((row, rowIndex) => {
-        row.forEach((letter, colIndex) => {
-            const cell = document.createElement('div');
-            cell.textContent = letter;
-            cell.dataset.row = rowIndex;
-            cell.dataset.col = colIndex;
-            cell.classList.add('cell');
-            cell.addEventListener('click', selectLetter);
-            wordSearchContainer.appendChild(cell);
-        });
-    });
-
-    // Iniciar temporizador
-    iniciarTemporizador();
-});
-
-// Función para mostrar las palabras a encontrar en la lista
-function mostrarPalabras() {
-    const wordListContainer = document.getElementById('word-list-container');
-    Object.keys(wordList).forEach(word => {
-        const listItem = document.createElement('li');
-        listItem.textContent = word;
-        wordListContainer.appendChild(listItem);
-    });
-}
-
 
 
     </script>
 </head>
 <body>
-    <center>
-        <br><br><br><br><br><br><br><br><br><br><br>
-    <h1>Sopa de Letras</h1></center>
+    <center> 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    <h1>Sopa de Letras</h1>
     <body background="Iphone wallpaper green, Simple wallpapers, Iphone wallpaper Download Free.jfif"></body>
-    <div id="word-list">
+
+<div id="word-list"> 
        <center> <h2>Palabras a encontrar:</h2>
         <ul id="word-list-container"></center>
-            <!-- Las palabras aparecerán aquí -->
+            <li>ECOSISTEMA</li>
+            <li>DESEQUILIBRIO</li>
+            <li>DEFORESTACION</li>
+            <li>CONTAMINACION</li>
+            <li>URBANIZACION</li>
         </ul>
     </div>
-    
-   
-    
+
+
     <div id="word-search"></div>
     <div id="controls">
-        <center></cener><button onclick="calcularPuntos()">Comprobar</button></center>
-        <center><button onclick="reiniciarJuego()">Reiniciar</button></center>
+        <button onclick="calcularPuntos()">Comprobar</button>
+        <button onclick="reiniciarJuego()">Reiniciar</button>
     </div>
     <div id="resultado"></div>
-    <center><div id="timer">Tiempo restante: <span id="time">03:00</span> segundos</div></center>
+    <div id="timer">Tiempo restante: <span id="time">03:00</span> segundos</div>
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&display=swap');
         
         
@@ -269,17 +265,26 @@ function mostrarPalabras() {
           font-size: 30px;
           color: rgb(78, 139, 99);
             }
-            body {
-                font-family: "Josefin Sans", sans-serif;
+         body {
+            font-family: "Josefin Sans", sans-serif;
 font-optical-sizing: auto;
 font-weight: weight;
 font-style: normal;
 color:rgb(68, 111, 83);
 font-weight: 600;
 font-size: 20px;
-            }
+    text-align: center;
+    margin: 0;
+    padding: 0;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
 
-            .mini-banner {
+.mini-banner {
     background-color: rgb(81, 139, 101);
     color: white;
     display: flex;
@@ -323,7 +328,6 @@ font-size: 20px;
     color: #9ad6a7;
 }
 
-
 .drag-container {
     display: flex;
     flex-wrap: wrap;
@@ -340,15 +344,16 @@ font-size: 20px;
     background-color: #799980;
 }
 .dropzone {
-    width: 200px;
-    height: 200px;
-    border: 2px dashed #ffffff;
+        width: 150px;
+    padding: 10px;
+    border: 2px solid #416453;
     border-radius: 5px;
-    display: inline-block;
     margin: 10px;
-    vertical-align: top;
-    background-size: cover;
-    background-position: center;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #799980;
+ 
+    
 }
 .correct {
     background-color: #abf7af;
@@ -368,7 +373,7 @@ footer {
 
 /* Sopa de letras */
 #word-search {
-    position: center;
+        position: center;
     display: grid;
     grid-template-columns: repeat(15, 50px);
     grid-gap: 8px;
@@ -460,11 +465,11 @@ button:active {
 }
 
 #resultado.green {
-    color: #8eb190; /* Verde para los resultados positivos */
+   color: #8eb190; /* Verde para los resultados positivos */
 }
 
 #resultado.red {
-    color: #c59191; /* Rojo para los resultados negativos */
+     color: #c59191; /* Rojo para los resultados negativos */
 }
 
 /* Animaciones */
@@ -496,7 +501,6 @@ button:active {
     padding: 5px 0;
     font-weight: bold;
 }
-
 
 </style>
     

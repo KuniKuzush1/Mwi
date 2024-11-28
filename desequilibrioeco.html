@@ -59,6 +59,26 @@ color:rgb(68, 111, 83);
 font-weight: 600;
 font-size: 20px;
             }
+
+.btn {
+    background-color: #aee2af; /* Green background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Get the block but respect the inline */
+    font-size: 16px; /* Increase font size */
+    margin: 10px; /* Some space between the buttons */
+    cursor: pointer; /* Pointer/hand icon on hover */
+    border-radius: 12px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn:hover {
+    background-color: #a6d6a9; /* Darker green on hover */
+}
+
             </style>
             
     <body background="Iphone wallpaper green, Simple wallpapers, Iphone wallpaper Download Free.jfif">
@@ -90,8 +110,9 @@ font-size: 20px;
         <div id="drop9" class="dropzone" style="background-image: url('destruccionhabitats.jpg');"></div>
         <div id="drop10" class="dropzone" style="background-image: url('especiesinva.jpg');"></div>
     </div>
-    <button onclick="calcularPuntos()">Comprobar</button>
-    <button onclick="reiniciarJuego()">Reiniciar</button>
+        <button onclick="calcularPuntos()" class="btn">Comprobar</button>
+        <button onclick="reiniciarJuego()" class="btn">Reiniciar</button>
+
     <div id="resultado"></div></center>
     <script src="desequilibrioeco.js"></script>
 </section>
