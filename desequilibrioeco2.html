@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <header class="mini-banner">
+        <a href="lol.html"></a><img src="logo-removebg-preview (1).png" width="100" height="100"> <center><h1 class="banner">PlayGreen!</center>
+        <nav>
+            <ul class="nav-links">
+                <li><h2 class="link1"><a href="kk.html">Contenido Cadenas Troficas</h2></a></li>
+                <li><h2 class="link2"><a href="infodesequilibrio.html">Contenido Desequilibrio Ecologico</h2></a></li>
+                <li><h2 class="link3"><a href="lol.html">Menú</h2>></a></li>
+            </ul>
+        </nav><br><br><br><br><br><br>
+    </header>
+    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    <tyle>Sopa de Letras</title>
+    <script> 
+alert("¡Bienvenido a la Sopa de Letras de Cadenas Troficas!, PlayGreen te desea buena suerte.");
+
+        const wordSearch = [
+    ['D', 'E', 'S', 'E', 'Q', 'U', 'I', 'L', 'I', 'B', 'R', 'I', 'O', 'D', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O', 'X', 'X', 'X', 'E', 'X'],
+    ['X', 'E', 'C', 'O', 'S', 'I', 'S', 'T', 'E', 'M', 'A', 'X', 'X', 'F', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'B', 'X', 'X', 'X', 'O', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'R', 'X', 'X', 'X', 'R', 'X'],
+    ['S', 'O', 'A', 'R', 'Z', 'R', 'E', 'C', 'C', 'A', 'X', 'X', 'X', 'E', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'E', 'X', 'X', 'X', 'S', 'X'],
+    ['U', 'R', 'B', 'A', 'N', 'I', 'Z', 'A', 'C', 'I', 'O', 'N', 'X', 'T', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'N', 'X', 'X', 'X', 'A', 'X'],
+    ['C', 'O', 'N', 'T', 'A', 'M', 'I', 'N', 'A', 'C', 'I', 'O', 'N', 'C', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'I', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'O', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'N', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
+    ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X']
+];
+
+
+const wordList = {
+    'DESEQUILIBRIO': 'Estado en el que no hay equilibrio o igualdad en algún aspecto.',
+    'ECOSISTEMA': 'Conjunto de organismos vivos que interactúan entre sí y con su entorno.',
+    'URBANIZACION': 'Proceso de desarrollo y expansión de áreas urbanas.',
+    'CONTAMINACION': 'Introducción de sustancias nocivas en el medio ambiente que causan efectos negativos.',
+    'DEFORESTACION': 'Proceso de tala o eliminación de bosques, habitualmente para obtener suelo agrícola.'
+};
+
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+
+
+function getRandomLetter() {
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    return alphabet[randomIndex];
+}
+
+// Función para llenar las celdas vacías con letras aleatorias
+function llenarConLetrasAleatorias() {
+    for (let row = 0; row < wordSearch.length; row++) {
+        for (let col = 0; col < wordSearch[row].length; col++) {
+            if (wordSearch[row][col] === 'X') {
+                wordSearch[row][col] = getRandomLetter();
+            }
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    llenarConLetrasAleatorias();
+    const wordSearchContainer = document.getElementById('word-search');
+
+    // Crear la sopa de letras
+    wordSearch.forEach((row, rowIndex) => {
+        row.forEach((letter, colIndex) => {
+            const cell = document.createElement('div');
+            cell.textContent = letter;
+            cell.dataset.row = rowIndex;
+            cell.dataset.col = colIndex;
+            cell.classList.add('cell');
+            cell.addEventListener('click', selectLetter);
+            wordSearchContainer.appendChild(cell);
+        });
+    });
+
+    
+});
+
+
+// Función para formatear el tiempo
+function formatTiempo(tiempo) {
+    return tiempo < 10 ? '0' + tiempo : tiempo; // Asegurar que el tiempo se muestre con dos dígitos
+}
+
+
+// Función para formatear el tiempo
+function formatTiempo(tiempo) {
+    return tiempo < 10 ? '0' + tiempo : tiempo;
+}
+
+// Función para deshabilitar el juego cuando se acabe el tiempo
+function deshabilitarJuego() {
+    document.querySelectorAll('.cell').forEach(cell => {
+        cell.removeEventListener('click', selectLetter); // Eliminar la interacción
+        cell.classList.add('disabled');  // Opcional: puedes añadir una clase para cambiar el estilo de las celdas
+    });
+}
+
+// Función para seleccionar una letra
+function selectLetter(event) {
+    event.target.classList.toggle('selected');
+}
+
+// Función para calcular puntos y mostrar información de las palabras encontradas
+function calcularPuntos() {
+    const selectedCells = document.querySelectorAll('#word-search .selected');
+    const selectedWords = new Set();
+
+    selectedCells.forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+
+        // Horizontal
+        let horizontalWord = '';
+        for (let i = col; i < wordSearch[row].length; i++) {
+            horizontalWord += wordSearch[row][i];
+            if (Object.keys(wordList).includes(horizontalWord)) selectedWords.add(horizontalWord);
+        }
+
+        // Vertical
+        let verticalWord = '';
+        for (let i = row; i < wordSearch.length; i++) {
+            verticalWord += wordSearch[i][col];
+            if (Object.keys(wordList).includes(verticalWord)) selectedWords.add(verticalWord);
+        }
+    });
+
+    // Calcular puntos y errores
+    const puntos = selectedWords.size * 20;
+let errores = '';
+let informacion = '';
+
+Object.keys(wordList).forEach(word => {
+    if (!selectedWords.has(word)) {
+        // Aquí se corregió la concatenación con comillas invertidas y el texto de error
+        errores += `No encontraste la palabra: ${word}.<br>`;
+    } else {
+        // Aquí también corregimos la concatenación de la información con las comillas invertidas
+        informacion += `${word}: ${wordList[word]}<br>`;
+    }
+});
+
+// Mostrar resultado e información de las palabras encontradas
+document.getElementById('resultado').innerHTML = `
+    Puntos Totales: ${puntos}/100<br>${errores}<br>${informacion}
+`;
+
+document.getElementById('resultado').style.color = puntos === 100 ? 'green' : 'red';
+document.getElementById('resultado').style.fontSize = '24px';
+document.getElementById('resultado').style.fontWeight = 'bold';
+// Detener el temporizador al hacer clic en "Comprobar"
+clearInterval(intervalo);  // Detener el temporizador cuando se haga clic en "Comprobar"
+}
+
+// Función para reiniciar el juego
+function reiniciarJuego() {
+    document.querySelectorAll('#word-search .cell').forEach(cell => {
+        cell.classList.remove('selected');
+    });
+    document.getElementById('resultado').innerHTML = '';
+    tiempoRestante = 180;  // Reiniciar el temporizador
+    document.getElementById('time').textContent = '03:00';
+    clearInterval(intervalo);
+    iniciarTemporizador();  // Reiniciar el temporizador
+    document.querySelectorAll('.cell').forEach(cell => {
+        cell.classList.remove('disabled');  // Eliminar cualquier estilo de "deshabilitado"
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    llenarConLetrasAleatorias();
+    const wordSearchContainer = document.getElementById('word-search');
+
+    // Mostrar las palabras a encontrar
+    mostrarPalabras();
+
+    // Crear la sopa de letras
+    wordSearch.forEach((row, rowIndex) => {
+        row.forEach((letter, colIndex) => {
+            const cell = document.createElement('div');
+            cell.textContent = letter;
+            cell.dataset.row = rowIndex;
+            cell.dataset.col = colIndex;
+            cell.classList.add('cell');
+            cell.addEventListener('click', selectLetter);
+            wordSearchContainer.appendChild(cell);
+        });
+    });
+
+    // Iniciar temporizador
+    iniciarTemporizador();
+});
+
+// Función para mostrar las palabras a encontrar en la lista
+function mostrarPalabras() {
+    const wordListContainer = document.getElementById('word-list-container');
+    Object.keys(wordList).forEach(word => {
+        const listItem = document.createElement('li');
+        listItem.textContent = word;
+        wordListContainer.appendChild(listItem);
+    });
+}
+
+
+
+    </script>
+</head>
+<body>
+    <center>
+        <br><br><br><br><br><br><br><br><br><br><br>
+    <h1>Sopa de Letras</h1></center>
+    <body background="Iphone wallpaper green, Simple wallpapers, Iphone wallpaper Download Free.jfif"></body>
+    <div id="word-list">
+       <center> <h2>Palabras a encontrar:</h2>
+        <ul id="word-list-container"></center>
+            <!-- Las palabras aparecerán aquí -->
+        </ul>
+    </div>
+    
+   
+    
+    <div id="word-search"></div>
+    <div id="controls">
+        <center></cener><button onclick="calcularPuntos()">Comprobar</button></center>
+        <center><button onclick="reiniciarJuego()">Reiniciar</button></center>
+    </div>
+    <div id="resultado"></div>
+    <center><div id="timer">Tiempo restante: <span id="time">03:00</span> segundos</div></center>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&display=swap');
+        
+        
+            .banner{
+        font-family: "Concert One", sans-serif;
+          font-weight: 600;
+          font-style: normal;
+          font-size: 60px;
+          color: rgb(249, 249, 249);
+            }
+            .link1{
+        font-family:"Concert One", sans-serif;
+          font-weight: 600;
+          font-style: normal;
+          font-size: 30px;
+          color: rgb(78, 139, 99);
+            }
+            .link2{
+                font-family:"Concert One", sans-serif;
+          font-weight: 600;
+          font-style: normal;
+          font-size: 30px;
+          color: rgb(78, 139, 99);
+            }
+            .link3{
+                font-family:"Concert One", sans-serif;
+          font-weight: 600;
+          font-style: normal;
+          font-size: 30px;
+          color: rgb(78, 139, 99);
+            }
+            body {
+                font-family: "Josefin Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: weight;
+font-style: normal;
+color:rgb(68, 111, 83);
+font-weight: 600;
+font-size: 20px;
+            }
+
+            .mini-banner {
+    background-color: rgb(81, 139, 101);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #9ad6a7;
+}
+
+
+.drag-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.drag-item {
+    width: 150px;
+    padding: 10px;
+    border: 2px solid #416453;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #799980;
+}
+.dropzone {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ffffff;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
+    background-size: cover;
+    background-position: center;
+}
+.correct {
+    background-color: #abf7af;
+}
+.incorrect {
+    background-color: #f7b2b2;
+}
+footer {
+    background-color: #7b8b5b;
+    padding: 10px;
+    color: white;
+}
+        .rotar-imagen {
+          transform: rotate(10); 
+        }
+        
+
+/* Sopa de letras */
+#word-search {
+    position: center;
+    display: grid;
+    grid-template-columns: repeat(15, 50px);
+    grid-gap: 8px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #a8e6cf; /* Borde de color verde pastel */
+}
+
+/* Efecto hover de las celdas */
+.cell:hover {
+    background-color: #c8e6c9; /* Color verde claro */
+    transform: scale(1.1);
+}
+
+/* Celda seleccionada */
+.cell.selected {
+    background-color: #81c784; /* Verde suave */
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Celda deshabilitada */
+.cell.disabled {
+    background-color: #e0f7fa; /* Color pastel suave */
+    pointer-events: none;
+}
+
+/* Temporizador */
+#timer {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #4CAF50; /* Verde pastel */
+    font-weight: bold;
+}
+
+/* Controles y botones */
+#controls {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #81c784; /* Verde suave */
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #66bb6a; /* Verde ligeramente más oscuro */
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+/* Resultado */
+#resultado {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo con transparencia */
+    border-radius: 8px;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resultado.green {
+    color: #8eb190; /* Verde para los resultados positivos */
+}
+
+#resultado.red {
+    color: #c59191; /* Rojo para los resultados negativos */
+}
+
+/* Animaciones */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+#time {
+    animation: blink 1s step-end infinite;
+}
+#word-list {
+    font-size: 1.2rem;
+    color: #4CAF50;
+    margin-top: 20px;
+}
+
+#word-list h2 {
+    margin-bottom: 10px;
+}
+
+#word-list-container {
+    list-style: none;
+    padding: 0;
+}
+
+#word-list-container li {
+    padding: 5px 0;
+    font-weight: bold;
+}
+
+
+</style>
+    
+</body>
+</html>
